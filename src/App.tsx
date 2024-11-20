@@ -7,7 +7,7 @@ export default function Component() {
   const [isPickerOpen, setPickerOpen] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState(null);
 
-  // States for form fields
+ 
   const [rowsInOnePage, setRowsInOnePage] = useState(3);
   const [columnsInOnePage, setColumnsInOnePage] = useState(4);
   const [iconHeight, setIconHeight] = useState(50);
@@ -21,7 +21,7 @@ export default function Component() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      {/* Trigger for opening the configuration form */}
+     
       <div
         className="w-24 h-24 bg-gray-200 border rounded-lg flex items-center justify-center cursor-pointer"
         onClick={() => setFormOpen(true)}
@@ -38,7 +38,7 @@ export default function Component() {
         )}
       </div>
 
-      {/* Configuration Form */}
+      
       {isFormOpen && (
         <form
           onSubmit={handleFormSubmit}
@@ -92,7 +92,7 @@ export default function Component() {
         </form>
       )}
 
-      {/* Icon Picker */}
+     
       {isPickerOpen && (
         <IconPicker
           rowsInOnePage={rowsInOnePage}
