@@ -1,14 +1,17 @@
-import  {icons } from "feather-icons"
-import { useState } from "react";
+import {icons} from "feather-icons";
+import {useState} from "react";
+
+
 export default function IconPicker({
-    rowsInOnePage,
-    columnsInOnePage,
-    iconHeight,
-    iconWidth,
+    rowsInOnePage = 1,
+    columnsInOnePage = 1,
+    iconHeight = 50 ,
+    iconWidth= 50,
     pickerHeight = 500,
     pickerWidth = 500,
-    onClose,
-    onSelect,
+    // @ts-ignore
+    onClose,onSelect,
+    
   }) {
     const itemsPerPage = rowsInOnePage * columnsInOnePage;
     const iconKeys = Object.keys(icons);
@@ -17,6 +20,9 @@ export default function IconPicker({
     const totalPages = Math.ceil(iconKeys.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentIcons = iconKeys.slice(startIndex, startIndex + itemsPerPage);
+  
+    const dynamicHeight = Math.max(pickerHeight, rowsInOnePage * iconHeight );
+    const dynamicWidth = Math.max(pickerWidth,iconWidth * columnsInOnePage);
   
     const goToNextPage = () => {
       if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -28,25 +34,28 @@ export default function IconPicker({
   
     return (
       <div
-        className="absolute bg-white shadow-lg rounded-lg"
+        className="fixed inset-0 bg-white bg-opacity-95 z-50 flex flex-col"
         style={{
-          width: pickerWidth,
-          height: pickerHeight,
+          width: dynamicWidth,
+          height: dynamicHeight,
+          margin: "auto",
           padding: "16px",
-          zIndex: 1000,
         }}
       >
         <div
-          className="grid gap-4 overflow-hidden"
+          className="flex-1 grid gap-4 overflow-hidden"
           style={{
             gridTemplateColumns: `repeat(${columnsInOnePage}, ${iconWidth}px)`,
             gridTemplateRows: `repeat(${rowsInOnePage}, ${iconHeight}px)`,
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           {currentIcons.map((key) => (
             <div
               key={key}
-              className="flex items-center justify-center cursor-pointer border rounded"
+              className="flex h-full w-full items-center justify-center cursor-pointer border rounded"
+              //@ts-ignore
               dangerouslySetInnerHTML={{ __html: icons[key].toSvg() }}
               onClick={() => {
                 onSelect(key);
@@ -77,4 +86,3 @@ export default function IconPicker({
       </div>
     );
   }
-  
