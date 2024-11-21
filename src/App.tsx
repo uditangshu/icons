@@ -8,8 +8,8 @@ export default function Component() {
   const [selectedIcon, setSelectedIcon] = useState(null);
 
  
-  const [rowsInOnePage, setRowsInOnePage] = useState(3);
-  const [columnsInOnePage, setColumnsInOnePage] = useState(4);
+  const [rowsInOnePage, setRowsInOnePage] = useState(1);
+  const [columnsInOnePage, setColumnsInOnePage] = useState(1);
   const [iconHeight, setIconHeight] = useState(50);
   const [iconWidth, setIconWidth] = useState(50);
 
@@ -23,7 +23,7 @@ export default function Component() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
      
       <div
-        className="w-24 h-24 bg-gray-200 border rounded-lg flex items-center justify-center cursor-pointer"
+        className="w-24 h-24 bg-blue-400 border rounded-lg flex items-center justify-center cursor-pointer"
         onClick={() => setFormOpen(true)}
       >
         {selectedIcon ? (
